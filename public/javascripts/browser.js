@@ -1,6 +1,7 @@
-var bootstrap = require("./bootstrap"),
-  $ = require("jquery"),
-  contentTemplate = require("./views/content.jade");
+
+var $ = require("jQuery"),
+  bootstrap = require("./bootstrap"),
+  contentTemplate = require("./views/content.hbs");
 
 function loadContent($el){
   var dfr = new $.Deferred();

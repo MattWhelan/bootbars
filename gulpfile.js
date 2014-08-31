@@ -1,42 +1,53 @@
 var path = require("path"),
   gulp = require("gulp"),
-  browserify = require("gulp-browserify"),
-  rimraf = require("gulp-rimraf"),
-  sass = require("gulp-sass");
+  browserify = require("browserify"),
+  rimraf = require("gulp-rimraf"),  //TODO replace with 'del'
+  sass = require("gulp-sass"),
+  rename = require("gulp-rename"),
+  source = require("vinyl-source-stream");
 
-var src = path.join(__dirname, "public");
+var join = path.join;
+var src = join(__dirname, "public");
 
+var target = join(__dirname, "target"),
+  staging = join(target, "staging", "js"),
+  assets = join(target, "assets");
 
-var target = path.join(__dirname, "target"),
-  assets = path.join(target, "assets");
-
-gulp.task("js", function () {
-  return gulp.src([path.join(src, 'javascripts', 'browser.js'), 'views/**.jade'])
-    .pipe(browserify({
-      insertGlobals: true,
-      debug: true
+gulp.task("stage-js", function(){
+  var scriptPath = join(src, 'javascripts');
+  return gulp.src("views/**.hbs")
+    .pipe(rename({
+      dirname: "views"
     }))
-    .pipe(gulp.dest(path.join(assets, 'js')));
+    .pipe(gulp.src(join(scriptPath, "**")))
+    .pipe(gulp.dest(staging));
+});
+
+gulp.task("js", ["stage-js"], function () {
+ return browserify(join(staging, 'browser.js'), {debug: true})
+    .bundle()
+    .pipe(source('browser.js'))
+    .pipe(gulp.dest(join(assets, 'js')));
 });
 
 gulp.task("css", function () {
-  return gulp.src(path.join(src, 'stylesheets', 'style.scss'))
+  return gulp.src(join(src, 'stylesheets', 'style.scss'))
     .pipe(sass({
       sourceMap: true,
       imagePath: '/images'
     }))
-    .pipe(gulp.dest(path.join(assets, 'css')));
+    .pipe(gulp.dest(join(assets, 'css')));
 
 });
 
 gulp.task("fonts", function(){
-  return gulp.src(path.join(src, 'fonts/**'))
-    .pipe(gulp.dest(path.join(assets, 'fonts')));
+  return gulp.src(join(src, 'fonts/**'))
+    .pipe(gulp.dest(join(assets, 'fonts')));
 });
 
 gulp.task("images", function(){
-  return gulp.src(path.join(src, 'images/**'))
-    .pipe(gulp.dest(path.join(assets, 'images')));
+  return gulp.src(join(src, 'images/**'))
+    .pipe(gulp.dest(join(assets, 'images')));
 });
 
 gulp.task("clean", function(){
@@ -49,6 +60,6 @@ gulp.task("assets", ["js", "css", "fonts", "images"]);
 gulp.task("default", ["assets"]);
 
 gulp.task("watch", ["assets"], function(cb){
-  gulp.watch(path.join(src, "**"), ["assets"]);
+  gulp.watch(join(src, "**"), ["assets"]);
   cb();
 });

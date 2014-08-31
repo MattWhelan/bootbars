@@ -1,0 +1,50 @@
+
+<ul class="nav nav-tabs">
+    <li class="active">
+        <a href="#home" data-toggle="tab" role="tab">Home</a>
+    </li>
+    <li>
+        <a href="#users" data-toggle="tab" role="tab">Users</a>
+    </li>
+    <li>
+        <a href="#admins" data-toggle="tab" role="tab">Admins</a>
+    </li>
+</ul>
+<div class="tab-content">
+    <div id="home" class="tab-pane active">
+        Home
+    </div>
+    <div id="users" class="tab-pane">
+        Users
+    </div>
+    <div id="admins" class="tab-pane">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-md-2">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a href="#one" data-toggle="pill" role="tab">One</a>
+                        </li>
+                        <li>
+                            <a href="#two" data-toggle="pill" role="tab">Two</a>
+                        </li>
+                        <li>
+                            <a href="#three" data-toggle="pill" role="tab">Three</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-md-10">
+                    <div class="tab-content">
+                        <div id="one" class="tab-pane dynamic">
+                            <div class="panel">
+                                <div class="panel-body dynamic-content"></div>
+                            </div>
+                        </div>
+                        <div id="two" class="tab-pane dynamic dynamic-content"></div>
+                        <div id="three" class="tab-pane">Three</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
