@@ -1,10 +1,11 @@
-@import "compass/css3";
+@import "bootstrap-bare";
+@import "bootstrap.scss";
 
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
+.loading .dynamic-content,
+.loading.dynamic-content{
+  min-height: 50px;
+  min-width: 50px;
+  background-image: image-url("spinner-50.gif");
+  background-position: center;
+  background-repeat: no-repeat;
 }
