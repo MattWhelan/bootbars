@@ -1,7 +1,8 @@
-
 var $ = require("jQuery"),
   bootstrap = require("./bootstrap"),
   contentTemplate = require("./views/content.hbs");
+
+require("./allPartials");
 
 function loadContent($el){
   var dfr = new $.Deferred();
@@ -24,7 +25,6 @@ $(document).ready(function(){
       loadContent($tabPane.find(".dynamic-content").addBack(".dynamic-content").first()).then(function(){
         $tabPane.removeClass("loading");
       });
-
     }
   });
 });

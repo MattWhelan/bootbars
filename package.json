@@ -21,11 +21,14 @@
   "devDependencies": {
     "browserify": "^5.11.0",
     "browserify-shim": "^3.7.0",
+    "del": "^0.1.2",
     "gulp": "^3.8.7",
     "gulp-rename": "^1.2.0",
     "gulp-rimraf": "^0.1.0",
     "gulp-sass": "^0.7.3",
     "hbsfy": "^2.1.0",
+    "stream-reduce": "^1.0.3",
+    "vinyl": "^0.4.2",
     "vinyl-source-stream": "^0.1.1"
   },
   "browser": {
