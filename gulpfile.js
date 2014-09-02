@@ -21,10 +21,10 @@ gulp.task("register-partials", function(){
     read: false
   })
     .pipe(reduce(function(memo, data){
-      var filePath = data.path;
-      var filename = filePath.substr(data.base.length);
-      if(filename.length){
-        var partialName = path.basename(filename, ".hbs");
+      if(data.stat.isFile()){
+        var filePath = data.path;
+        var filename = filePath.substr(data.base.length);
+        var partialName = filename.replace(/\.hbs$/, "");
         var reg = 'hbs.registerPartial("' + partialName + '", require("./views/partials/' + filename + '"));\n';
         return memo + reg;
       } else {
